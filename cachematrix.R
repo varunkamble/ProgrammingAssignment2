@@ -3,6 +3,9 @@
 
 ## Write a short comment describing this function
 
+## This function creates getter and setter methods for the matrix 'x'
+## and initialises NULL to the inverse matrix variable.
+## It returns the list of methods defined to operate on matrix 'x'.
 makeCacheMatrix <- function(x = matrix()) {
         
         my_inverse <- NULL
@@ -22,32 +25,27 @@ makeCacheMatrix <- function(x = matrix()) {
 
 ## Write a short comment describing this function
 
+## This function is to calculate the inverse of the given matrix but it first 
+## checks the cached value by calling the method 'getinverse()' defined in the
+## above method 'makeCacheMatrix()' to get the cached value of the inputted
+## matrix x.
+## If cached value is NULL the it proceeds to calculate the inverse using the 
+## 'solve()' function and then caching its result using the 'setinverse()'
+## method defined in the 'makeCacheMatrix()' method.
+
 cacheSolve <- function(x, ...) {
         
         my_inverse <- x$getinverse()
         
         if (!is.null(my_inverse)){
-                message("getting cache data")
+                message("Getting cached Data!!!")
                 return(my_inverse)
         }
         
-        ## Checking if it a square matrix
-        #dimensions <- function(x){ if (dim(x)[1] == dim(x)[2]) a <- dim(x)[1]} 
-        #my_dimensions <- dimensions(x)
-        
-        ## identity matrix 
-        #I <- matrix(c(1,0,0,1), nrow = my_dimensions, ncol = my_dimensions)
-        
-        ## Check if Inverse of matrix X exits
-        #if (determinant(x, logarithm = FALSE) == 0){
-         #       message("determinant is zero, hence inverse doesnot exist")
-          #      return(0)
-        #}
-        #else {
         my_matrix <- x$get()
         my_inverse <- solve(my_matrix)
         x$setinverse(my_inverse)
-        #}        
+        
         ## Return a matrix that is the inverse of 'x'
         my_inverse
 }
